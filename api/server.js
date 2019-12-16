@@ -12,7 +12,7 @@ server.use('/api', authRouter);
 server.use('/api/users', usersRouter);
 
 server.get('/', (req, res) => {
-    res.json({ api: "It's alive" });
+    res.json({ api: "***TEST => IT'S WORKING!!!***" });
 });
 
 module.exports = server;
