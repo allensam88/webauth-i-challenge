@@ -30,6 +30,7 @@ router.post('/login', (req, res) => {
         .first()
         .then(user => {
             if (user && bcrypt.compareSync(password, user.password)) {
+                req.session.user = user;
                 res.status(200).json({ message: `${user.username} is now logged in.` });
             } else {
                 res.status(401).json({ message: 'You shall not pass!' });
@@ -38,6 +39,20 @@ router.post('/login', (req, res) => {
         .catch(error => {
             res.status(500).json(error);
         });
+});
+
+router.get('/logout', (req, res) => {
+    if(req.session) {
+        req.session.destroy(err => {
+            if (err) {
+            res.json({ message: 'you can checkout any time, but you can never leave'})
+            } else {
+                res.status(200).json({ message: 'bye, thanks for playing!' })
+            }
+        });
+    } else {
+        res.status(200).json({ message: 'You were never here to begin with' })
+    }
 });
 
 module.exports = router;
