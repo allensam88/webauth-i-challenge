@@ -1,7 +1,3 @@
-const bcrypt = require('bcryptjs');
-
-const Users = require('../users/users-model.js');
-
 module.exports = function restricted(req, res, next) {
     if (req.session && req.session.user) {
         next();

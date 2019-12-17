@@ -6,13 +6,13 @@ const session = require('express-session');
 const sessionConfig = {
     name: 'monkey',
     secret: 'keep it secret, keep it safe!',
+    saveUninitialized: false, // GDPR laws against setting cookies automatically
+    resave: false,
     cookie: {
         maxAge: 1000 * 30,
         secure: false, // dynamically change to true in production environment
-        httpOnly: true,
-    },
-    resave: false,
-    saveUninitialized: false, // GDPR laws against setting cookies automatically
+        httpOnly: true
+    }
 };
 
 module.exports = server => {
