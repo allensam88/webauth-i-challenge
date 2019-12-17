@@ -11,7 +11,7 @@ router.get('/', restricted, (req, res) => {
         .catch(err => res.send(err));
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', restricted, (req, res) => {
     const { id } = req.params;
     let changes = req.body;
     const hash = bcrypt.hashSync(changes.password, 8);
